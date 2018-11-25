@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CarParkingLotModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BlackList">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" />
+    <Property Name="LicensePlate" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Block">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Building">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="SumAvail" Type="int" />
+    <Property Name="FP7Status" Type="nvarchar(max)" />
+    <Property Name="FP7Count" Type="int" />
+  </EntityType>
+  <EntityType Name="BuildingInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" />
+    <Property Name="Location" Type="nvarchar(max)" />
+    <Property Name="Longtitude" Type="real" />
+    <Property Name="Latitude" Type="real" />
+    <Property Name="Url" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="CarParkingLayout">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BuildingID" Type="int" />
+    <Property Name="BlockID" Type="int" />
+    <Property Name="PositionID" Type="int" />
+    <Property Name="StatusID" Type="int" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="LicensePlate" Type="nvarchar" MaxLength="50" />
+    <Property Name="ReservedTime" Type="datetime" />
+    <Property Name="ArrivalTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DataLogging">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BuildingID" Type="int" />
+    <Property Name="BlockID" Type="int" />
+    <Property Name="PositionID" Type="int" />
+    <Property Name="LoggedTime" Type="datetime" />
+    <Property Name="UserName" Type="nvarchar(max)" />
+    <Property Name="LicensePlate" Type="nvarchar" MaxLength="50" />
+    <Property Name="ArrivalTime" Type="datetime" />
+    <Property Name="LeavingTime" Type="datetime" />
+    <Property Name="TotalServiceMinutes" Type="bigint" />
+    <Property Name="Charge" Type="real" />
+  </EntityType>
+  <EntityType Name="Fee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeID" Type="int" />
+    <Property Name="SessionID" Type="int" />
+    <Property Name="Price" Type="real" />
+  </EntityType>
+  <EntityType Name="FeeSession">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SessionName" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="FeeType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="PositionStatus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PositionStatus" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar(max)" />
+    <Property Name="Username" Type="nvarchar(max)" />
+    <Property Name="Password" Type="nvarchar(max)" />
+    <Property Name="Balance" Type="bigint" />
+    <Property Name="Score" Type="int" />
+  </EntityType>
+  <Association Name="FK__Building__ID__1DE57479">
+    <End Role="BuildingInfo" Type="Self.BuildingInfo" Multiplicity="1" />
+    <End Role="Building" Type="Self.Building" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="BuildingInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Building">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CarParkin__Block__1FCDBCEB">
+    <End Role="Block" Type="Self.Block" Multiplicity="0..1" />
+    <End Role="CarParkingLayout" Type="Self.CarParkingLayout" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Block">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CarParkingLayout">
+        <PropertyRef Name="BlockID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CarParkin__Build__1ED998B2">
+    <End Role="BuildingInfo" Type="Self.BuildingInfo" Multiplicity="0..1" />
+    <End Role="CarParkingLayout" Type="Self.CarParkingLayout" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuildingInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CarParkingLayout">
+        <PropertyRef Name="BuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CarParkin__Statu__20C1E124">
+    <End Role="PositionStatus" Type="Self.PositionStatus" Multiplicity="0..1" />
+    <End Role="CarParkingLayout" Type="Self.CarParkingLayout" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PositionStatus">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CarParkingLayout">
+        <PropertyRef Name="StatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CarParkin__UserI__239E4DCF">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="CarParkingLayout" Type="Self.CarParkingLayout" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CarParkingLayout">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DataLoggi__Block__440B1D61">
+    <End Role="Block" Type="Self.Block" Multiplicity="0..1" />
+    <End Role="DataLogging" Type="Self.DataLogging" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Block">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DataLogging">
+        <PropertyRef Name="BlockID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DataLoggi__Build__4316F928">
+    <End Role="BuildingInfo" Type="Self.BuildingInfo" Multiplicity="0..1" />
+    <End Role="DataLogging" Type="Self.DataLogging" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuildingInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DataLogging">
+        <PropertyRef Name="BuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Fee__Price__30F848ED">
+    <End Role="FeeType" Type="Self.FeeType" Multiplicity="0..1" />
+    <End Role="Fee" Type="Self.Fee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FeeType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Fee">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Fee__SessionID__31EC6D26">
+    <End Role="FeeSession" Type="Self.FeeSession" Multiplicity="0..1" />
+    <End Role="Fee" Type="Self.Fee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FeeSession">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Fee">
+        <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CarParkingLotModelStoreContainer">
+    <EntitySet Name="BlackList" EntityType="Self.BlackList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Block" EntityType="Self.Block" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Building" EntityType="Self.Building" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BuildingInfo" EntityType="Self.BuildingInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarParkingLayout" EntityType="Self.CarParkingLayout" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DataLogging" EntityType="Self.DataLogging" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Fee" EntityType="Self.Fee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FeeSession" EntityType="Self.FeeSession" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FeeType" EntityType="Self.FeeType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PositionStatus" EntityType="Self.PositionStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Building__ID__1DE57479" Association="Self.FK__Building__ID__1DE57479">
+      <End Role="BuildingInfo" EntitySet="BuildingInfo" />
+      <End Role="Building" EntitySet="Building" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CarParkin__Block__1FCDBCEB" Association="Self.FK__CarParkin__Block__1FCDBCEB">
+      <End Role="Block" EntitySet="Block" />
+      <End Role="CarParkingLayout" EntitySet="CarParkingLayout" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CarParkin__Build__1ED998B2" Association="Self.FK__CarParkin__Build__1ED998B2">
+      <End Role="BuildingInfo" EntitySet="BuildingInfo" />
+      <End Role="CarParkingLayout" EntitySet="CarParkingLayout" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CarParkin__Statu__20C1E124" Association="Self.FK__CarParkin__Statu__20C1E124">
+      <End Role="PositionStatus" EntitySet="PositionStatus" />
+      <End Role="CarParkingLayout" EntitySet="CarParkingLayout" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CarParkin__UserI__239E4DCF" Association="Self.FK__CarParkin__UserI__239E4DCF">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="CarParkingLayout" EntitySet="CarParkingLayout" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DataLoggi__Block__440B1D61" Association="Self.FK__DataLoggi__Block__440B1D61">
+      <End Role="Block" EntitySet="Block" />
+      <End Role="DataLogging" EntitySet="DataLogging" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DataLoggi__Build__4316F928" Association="Self.FK__DataLoggi__Build__4316F928">
+      <End Role="BuildingInfo" EntitySet="BuildingInfo" />
+      <End Role="DataLogging" EntitySet="DataLogging" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Fee__Price__30F848ED" Association="Self.FK__Fee__Price__30F848ED">
+      <End Role="FeeType" EntitySet="FeeType" />
+      <End Role="Fee" EntitySet="Fee" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Fee__SessionID__31EC6D26" Association="Self.FK__Fee__SessionID__31EC6D26">
+      <End Role="FeeSession" EntitySet="FeeSession" />
+      <End Role="Fee" EntitySet="Fee" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

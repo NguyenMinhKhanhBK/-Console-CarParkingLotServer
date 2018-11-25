@@ -1,0 +1,14 @@
+C:\Users\UX410\Documents\Visual Studio 2017\Console\Server Quan Ly Bai Xe\Server Quan Ly Bai Xe\obj\Debug\Server Quan Ly Bai Xe.csprojAssemblyReference.cache
+C:\Users\UX410\Documents\Visual Studio 2017\Console\Server Quan Ly Bai Xe\Server Quan Ly Bai Xe\obj\Debug\Server Quan Ly Bai Xe.csproj.CoreCompileInputs.cache
+C:\Users\UX410\Documents\Visual Studio 2017\Console\Server Quan Ly Bai Xe\Server Quan Ly Bai Xe\bin\Debug\Server Quan Ly Bai Xe.exe.config
+C:\Users\UX410\Documents\Visual Studio 2017\Console\Server Quan Ly Bai Xe\Server Quan Ly Bai Xe\bin\Debug\Server Quan Ly Bai Xe.exe
+C:\Users\UX410\Documents\Visual Studio 2017\Console\Server Quan Ly Bai Xe\Server Quan Ly Bai Xe\bin\Debug\Server Quan Ly Bai Xe.pdb
+C:\Users\UX410\Documents\Visual Studio 2017\Console\Server Quan Ly Bai Xe\Server Quan Ly Bai Xe\bin\Debug\EntityFramework.dll
+C:\Users\UX410\Documents\Visual Studio 2017\Console\Server Quan Ly Bai Xe\Server Quan Ly Bai Xe\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\UX410\Documents\Visual Studio 2017\Console\Server Quan Ly Bai Xe\Server Quan Ly Bai Xe\bin\Debug\Newtonsoft.Json.dll
+C:\Users\UX410\Documents\Visual Studio 2017\Console\Server Quan Ly Bai Xe\Server Quan Ly Bai Xe\bin\Debug\EntityFramework.xml
+C:\Users\UX410\Documents\Visual Studio 2017\Console\Server Quan Ly Bai Xe\Server Quan Ly Bai Xe\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\UX410\Documents\Visual Studio 2017\Console\Server Quan Ly Bai Xe\Server Quan Ly Bai Xe\bin\Debug\Newtonsoft.Json.xml
+C:\Users\UX410\Documents\Visual Studio 2017\Console\Server Quan Ly Bai Xe\Server Quan Ly Bai Xe\obj\Debug\Server Quan Ly Bai Xe.csproj.CopyComplete
+C:\Users\UX410\Documents\Visual Studio 2017\Console\Server Quan Ly Bai Xe\Server Quan Ly Bai Xe\obj\Debug\Server Quan Ly Bai Xe.exe
+C:\Users\UX410\Documents\Visual Studio 2017\Console\Server Quan Ly Bai Xe\Server Quan Ly Bai Xe\obj\Debug\Server Quan Ly Bai Xe.pdb

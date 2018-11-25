@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="39640f68909e477c8ea8fe564b1b847e" Name="Diagram1" ZoomLevel="109">
+        <EntityTypeShape EntityType="CarParkingLotModel.BlackList" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarParkingLotModel.Block" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarParkingLotModel.Building" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarParkingLotModel.BuildingInfo" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarParkingLotModel.CarParkingLayout" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarParkingLotModel.DataLogging" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarParkingLotModel.Fee" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarParkingLotModel.FeeSession" Width="1.5" PointX="5.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarParkingLotModel.FeeType" Width="1.5" PointX="5.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarParkingLotModel.PositionStatu" Width="1.5" PointX="3.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarParkingLotModel.sysdiagram" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarParkingLotModel.User" Width="1.5" PointX="3.75" PointY="11.625" IsExpanded="true" />
+        <AssociationConnector Association="CarParkingLotModel.FK__CarParkin__Block__1FCDBCEB" ManuallyRouted="false" />
+        <AssociationConnector Association="CarParkingLotModel.FK__DataLoggi__Block__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="CarParkingLotModel.FK__Building__ID__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="CarParkingLotModel.FK__CarParkin__Build__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="CarParkingLotModel.FK__DataLoggi__Build__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="CarParkingLotModel.FK__CarParkin__Statu__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="CarParkingLotModel.FK__CarParkin__UserI__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="CarParkingLotModel.FK__Fee__Price__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="CarParkingLotModel.FK__Fee__SessionID__31EC6D26" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
