@@ -11,9 +11,13 @@ namespace Server_Quan_Ly_Bai_Xe
     {
       static void Main(string[] args)
         {
-            var s = "{'D2C':'true','BD':1,'FP7Count':2,'FP7Status':'121212121212121212121212','SumAvai':5}";
+            //var s = "{'D2C':'true','BD':1,'FP7Count':2,'FP7Status':'121212121212121212121212','SumAvai':5}";
+            var s = "{\"D2C\":\"true\",\"BD\":1,\"FP7Count\":2,\"FP7Status\":\"121212121212121212121212\",\"SumAvai\":5}";
             writeToBuildingTable(s);
             UpdateCarParkingLayoutTable(1);
+            var ss = "{'Reserves':true,'BD':2,'ID':'0123456727','CarCount':3,'NP':'63T1-11111/63T1-22222/63T1-33333','T':1}";
+            writeReservationToCarParkingLayoutTable(ss);
+
         }
 
         //Process received messages from PLC S7-1500 and save in SQL Building table
@@ -88,6 +92,60 @@ namespace Server_Quan_Ly_Bai_Xe
                 }
                 
             }
+        }
+
+
+
+        //{“Reserves”:”true”,“BD”:2,“ID”:”0123456727”,”CarCount”:2,”NP”:”59A-99999/67A-77777”,”T”:”1”}
+        static void writeReservationToCarParkingLayoutTable(string s)
+        {
+            var json2dict = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(s);
+            int buildingID =(int) json2dict["BD"];
+            string userID = json2dict["ID"];
+            int numberOfCar =(int) json2dict["CarCount"];
+            double expiredTime =(double) json2dict["T"];
+            List<string> licensePlates = new List<string>(); //Used in case numberOfCar > 1
+
+            List<CarParkingLayout> reservedCarList = new List<CarParkingLayout>();
+
+            string tempStr = json2dict["NP"];
+            var tempList = tempStr.Split('/').ToList();
+            foreach (var item in tempList)
+            {
+                licensePlates.Add(item);
+            }
+           
+            foreach (var item in licensePlates)
+            {
+                using (CarParkingLotEntities data = new CarParkingLotEntities())
+                {
+                    var blackList = data.BlackLists.Where(p => p.LicensePlate == item && p.PhoneNumber == userID).ToList();
+                    var currentAvailable = data.CarParkingLayouts.Where(p => p.BuildingID == buildingID && p.StatusID == 1).FirstOrDefault();
+                    if(currentAvailable != null && blackList.Count == 0)
+                    {
+                        currentAvailable.StatusID = 2;
+                        var searchUserID = data.Users.Where(p => p.Username == userID).FirstOrDefault();
+                        if(searchUserID != null) currentAvailable.UserID = searchUserID.ID;
+                        currentAvailable.LicensePlate = item;
+                        currentAvailable.ReservedTime = DateTime.Now;
+                        data.SaveChanges();
+                        
+                        //Notify that reservation request is accepted
+                        Console.OutputEncoding = System.Text.Encoding.UTF8;
+                        Console.WriteLine("Đặt chỗ thành công. Số xe {0}. Tài khoản {1}",item,userID);
+
+                    }
+                   else
+                    {
+                        Console.OutputEncoding = System.Text.Encoding.UTF8;
+                        Console.WriteLine("Đã hết chỗ hoặc tài khoản bị chặn. Số xe {0}. Tài khoản {1}", item, userID);
+                    }
+
+
+                }
+                
+            }
+            
         }
 
         //Divide a string to multiple blocks of chunkSize
